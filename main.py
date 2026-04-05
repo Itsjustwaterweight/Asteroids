@@ -7,7 +7,7 @@ from asteroidfield import AsteroidField
 from asteroid import Asteroid
 from logger import log_event
 from circleshape import *
-from shot import Shot
+from shot import Shot 
 
 
 def main():
@@ -34,6 +34,13 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
+
+        for asteroid in asteroids:
+            for shot in shots:
+                if asteroid.collides_with(shot):
+                    log_event("asteroid_shot")
+                    asteroid.split()
+                    shot.kill()
         
         screen.fill("black")
 
